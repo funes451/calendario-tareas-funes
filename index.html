@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Calendario de Tareas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,7 +19,7 @@
       <button type="button" data-usuario="David" class="boton-identidad usuario-david">David</button>
     </div>
   </div>
-</div>  
+</div>
 
 <header class="cabecera">
   <div class="cabecera-titulo">
@@ -38,12 +39,6 @@
 </nav>
 
 <section class="filtros">
-  <select id="filtro-responsable">
-    <option value="">Responsable: todos</option>
-    <option value="Eli">Eli</option>
-    <option value="Marti">Marti</option>
-    <option value="David">David</option>
-  </select>
   <select id="filtro-estado">
     <option value="">Estado: todos</option>
     <option value="pendiente">Pendiente</option>
@@ -104,14 +99,7 @@
           <input type="date" name="fecha_fin" min="2026-10-01" max="2027-12-31">
         </label>
       </div>
-      <div class="fila-triple">
-        <label>Responsable
-          <select name="responsable">
-            <option value="Eli">Eli</option>
-            <option value="Marti">Marti</option>
-            <option value="David">David</option>
-          </select>
-        </label>
+      <div class="fila-doble">
         <label>Prioridad
           <select name="prioridad">
             <option value="alta">Alta</option>
