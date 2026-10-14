@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendario de Tareas</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="seleccion-identidad" class="overlay oculto">
+  <div class="tarjeta-identidad">
+    <h1>Calendario de Tareas</h1>
+    <p>¿Quién eres?</p>
+    <div class="botones-identidad">
+      <button type="button" data-usuario="Eli" class="boton-identidad usuario-eli">Eli</button>
+      <button type="button" data-usuario="Marti" class="boton-identidad usuario-marti">Marti</button>
+      <button type="button" data-usuario="David" class="boton-identidad usuario-david">David</button>
+    </div>
+  </div>
+</div>  
+
+<header class="cabecera">
+  <div class="cabecera-titulo">
+    <h1>Calendario de Tareas</h1>
+    <span id="resumen-tareas" class="resumen-tareas"></span>
+  </div>
+  <div class="cabecera-acciones">
+    <span id="usuario-actual" class="insignia-usuario"></span>
+    <button type="button" id="cambiar-usuario" class="boton-secundario">Cambiar</button>
+    <button type="button" id="nueva-tarea" class="boton-primario">+ Nueva tarea</button>
+  </div>
+</header>
+
+<nav class="selector-vista">
+  <button type="button" id="pestania-calendario" class="pestania activa">Calendario</button>
+  <button type="button" id="pestania-agenda" class="pestania">Agenda</button>
+</nav>
+
+<section class="filtros">
+  <select id="filtro-responsable">
+    <option value="">Responsable: todos</option>
+    <option value="Eli">Eli</option>
+    <option value="Marti">Marti</option>
+    <option value="David">David</option>
+  </select>
+  <select id="filtro-estado">
+    <option value="">Estado: todos</option>
+    <option value="pendiente">Pendiente</option>
+    <option value="en curso">En curso</option>
+    <option value="hecho">Hecho</option>
+  </select>
+  <select id="filtro-prioridad">
+    <option value="">Prioridad: todas</option>
+    <option value="alta">Alta</option>
+    <option value="media">Media</option>
+    <option value="baja">Baja</option>
+  </select>
+  <select id="filtro-proyecto">
+    <option value="">Proyecto: todos</option>
+  </select>
+  <button type="button" id="limpiar-filtros" class="boton-secundario">Limpiar filtros</button>
+</section>
+
+<section class="panel-urgente">
+  <h2>Urgente / esta semana</h2>
+  <div id="lista-urgente" class="lista-urgente"></div>
+</section>
+
+<main>
+  <section id="seccion-calendario">
+    <div class="navegacion-mes">
+      <button type="button" id="mes-anterior" class="boton-navegacion">←</button>
+      <select id="selector-mes"></select>
+      <button type="button" id="mes-siguiente" class="boton-navegacion">→</button>
+      <button type="button" id="ir-hoy" class="boton-secundario">Hoy</button>
+    </div>
+    <div class="dias-semana">
+      <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+    </div>
+    <div id="cuadricula-calendario" class="cuadricula"></div>
+  </section>
+  <section id="seccion-agenda" class="oculto">
+    <div id="lista-agenda" class="lista-agenda"></div>
+  </section>
+</main>
+
+<div id="modal-tarea" class="overlay oculto">
+  <div class="tarjeta-modal">
+    <h2 id="titulo-modal">Tarea</h2>
+    <form id="formulario-tarea">
+      <input type="hidden" name="id">
+      <label>Título
+        <input type="text" name="titulo" required maxlength="120" autocomplete="off">
+      </label>
+      <label>Descripción
+        <textarea name="descripcion" rows="3"></textarea>
+      </label>
+      <div class="fila-doble">
+        <label>Fecha de inicio
+          <input type="date" name="fecha_inicio" required min="2026-10-01" max="2027-12-31">
+        </label>
+        <label>Fecha de fin (opcional)
+          <input type="date" name="fecha_fin" min="2026-10-01" max="2027-12-31">
+        </label>
+      </div>
+      <div class="fila-triple">
+        <label>Responsable
+          <select name="responsable">
+            <option value="Eli">Eli</option>
+            <option value="Marti">Marti</option>
+            <option value="David">David</option>
+          </select>
+        </label>
+        <label>Prioridad
+          <select name="prioridad">
+            <option value="alta">Alta</option>
+            <option value="media" selected>Media</option>
+            <option value="baja">Baja</option>
+          </select>
+        </label>
+        <label>Estado
+          <select name="estado">
+            <option value="pendiente" selected>Pendiente</option>
+            <option value="en curso">En curso</option>
+            <option value="hecho">Hecho</option>
+          </select>
+        </label>
+      </div>
+      <label>Proyecto
+        <input type="text" name="proyecto" list="lista-proyectos" maxlength="60" autocomplete="off">
+      </label>
+      <datalist id="lista-proyectos"></datalist>
+      <div class="acciones-modal">
+        <button type="button" id="boton-eliminar" class="boton-peligro">Eliminar</button>
+        <span class="separador-flexible"></span>
+        <button type="button" id="boton-cancelar" class="boton-secundario">Cancelar</button>
+        <button type="submit" class="boton-primario">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="aviso" class="aviso oculto"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
